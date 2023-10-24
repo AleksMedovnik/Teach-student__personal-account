@@ -13,7 +13,7 @@ import (
 )
 
 func init() {
-	config, err := initializers.LoadConfig(".")
+	config, err := initializers.LoadConfig("..")
 	if err != nil {
 		log.Fatalln("Failed to load environment variables! \n", err.Error())
 	}
@@ -33,14 +33,7 @@ func main() {
 		router.Get("/logout", middleware.DeserializeUser, controllers.LogoutUser)
 	})
 
-	micro.Get("/users/me", middleware.DeserializeUser, controllers.GetMe)
-
-	micro.Get("/healthchecker", func(c *fiber.Ctx) error {
-		return c.Status(fiber.StatusOK).JSON(fiber.Map{
-			"status":  "success",
-			"message": "JWT Authentication with Golang, Fiber, and GORM",
-		})
-	})
+	micro.Get("/users/profile", middleware.DeserializeUser, controllers.GetMe)
 
 	micro.All("*", func(c *fiber.Ctx) error {
 		path := c.Path()
