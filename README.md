@@ -5,13 +5,19 @@ docker-compose up -d
 docker-compose down
 
 // run app
-air 
+air
 
 // viewing the database from the terminal
 docker exec -it {your postgres container name} psql -U {your db username} {your db name}
-// exit 
+// exit
 exit
 
+Admin registration:
+INSERT INTO users
+(email, name, password, role)
+VALUE ('alex@x.com', 'Alex', 'fjefiwjflskdjwi13549kde', 'admin');
+
+User registration:
 POST
 http://localhost:8000/api/auth/register
 {
@@ -28,8 +34,8 @@ http://localhost:8000/api/auth/login
   "password": "hdjsewiuh"
 }
 
-GET 
+GET
 http://localhost:8000/api/users/profile
 
-GET 
+GET
 http://localhost:8000/api/auth/logout
