@@ -5,10 +5,10 @@ import (
 	"strings"
 	"time"
 
-	"github.com/gofiber/fiber/v2"
-	"github.com/golang-jwt/jwt"
 	"github.com/AleksMedovnik/Teach-student__personal-account/initializers"
 	"github.com/AleksMedovnik/Teach-student__personal-account/models"
+	"github.com/gofiber/fiber/v2"
+	"github.com/golang-jwt/jwt"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -37,10 +37,15 @@ func SignUpUser(c *fiber.Ctx) error {
 	}
 
 	newUser := models.User{
-		Name:     payload.Name,
-		Email:    strings.ToLower(payload.Email),
-		Password: string(hashedPassword),
-		Photo:    &payload.Photo,
+		Name:      payload.Name,
+		Email:     strings.ToLower(payload.Email),
+		Password:  string(hashedPassword),
+		Photo:     &payload.Photo,
+		Surname:   payload.Surname,
+		Country:   payload.Country,
+		City:      payload.City,
+		Contacts:  payload.Contacts,
+		DateBirth: payload.DateBirth,
 	}
 
 	result := initializers.DB.Create(&newUser)
