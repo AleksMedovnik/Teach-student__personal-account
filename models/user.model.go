@@ -12,8 +12,8 @@ type User struct {
 	ID        *uuid.UUID     `gorm:"type:uuid;default:uuid_generate_v4();primary_key"`
 	Name      string         `gorm:"type:varchar(100);not null"`
 	Email     string         `gorm:"type:varchar(100);uniqueIndex;not null"`
-	Password  string         `gorm:"type:varchar(100);uniqueIndex;not null"`
-	Role      *string        `gorm:"type:varchar(50);default:'student';not null"`
+	Password  string         `gorm:"type:varchar(100);not null"`
+	Role      *string        `gorm:"type:varchar(50);not null"`
 	Photo     *string        `gorm:"not null;default:'default.png'"`
 	Surname   string         `gorm:"type:varchar(255)"`
 	Country   string         `gorm:"type:varchar(255)"`
@@ -26,16 +26,24 @@ type User struct {
 
 type SignUpInput struct {
 	Name            string         `json:"name" validate:"required"`
-	Email           string         `json:"email" validate:"required"`
+	Email           string         `json:"email" validate:"required,email"`
 	Password        string         `json:"password" validate:"required,min=8"`
 	PasswordConfirm string         `json:"passwordConfirm" validate:"required,min=8"`
-	Role            string         `json:"role" validate:"required,ne='admin'"`
+	Role            string         `json:"role" validate:"required,excludes=admin"`
 	Photo           string         `json:"photo"`
 	Surname         string         `json:"surname" validate:"required"`
 	Country         string         `json:"country"`
 	City            string         `json:"city"`
 	Contacts        string         `json:"contacts"`
 	DateBirth       datatypes.Date `json:"date_birth" validate:"required"`
+}
+
+type SignUpAdminInput struct {
+	Name            string         `json:"name" validate:"required"`
+	Email           string         `json:"email" validate:"required"`
+	Password        string         `json:"password" validate:"required,min=8"`
+	PasswordConfirm string         `json:"passwordConfirm" validate:"required,min=8"`
+	Role            string         `json:"role" validate:"required,containsrune=admin"`
 }
 
 type SignInInput struct {
@@ -49,11 +57,11 @@ type UserResponse struct {
 	Email     string         `json:"email,omitempty"`
 	Role      string         `json:"role,omitempty"`
 	Photo     string         `json:"photo,omitempty"`
-	DateBirth datatypes.Date `json:"date_birth"`
+	DateBirth datatypes.Date `json:"date_birth,omitempty"`
 	Surname   string         `json:"surname,omitempty"`
-	Country   string         `json:"country"`
-	City      string         `json:"city"`
-	Contacts  string         `json:"contacts"`
+	Country   string         `json:"country,omitempty"`
+	City      string         `json:"city,omitempty"`
+	Contacts  string         `json:"contacts,omitempty"`
 	CreatedAt time.Time      `json:"created_at"`
 	UpdatedAt time.Time      `json:"updated_at"`
 }
