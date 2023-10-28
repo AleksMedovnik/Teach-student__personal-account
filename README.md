@@ -14,17 +14,23 @@ exit
 
 Admin registration:
 INSERT INTO users
-(email, name, password, role)
+(email, name, password, role, )
 VALUE ('alex@x.com', 'Alex', 'fjefiwjflskdjwi13549kde', 'admin');
 
 User registration:
 POST
 http://localhost:8000/api/auth/register
 {
-  "email": "alex@x.com",
-  "name": "Alex",
-  "password": "hdjsewiuh",
-  "passwordConfirm": "hdjsewiuh"
+    "name": "Pasha",
+    "email": "pasha@gmail.com",
+    "password": "jfdskjfeiejijfo",
+    "passwordConfirm": "jfdskjfeiejijfo",
+    "role": "teacher",
+    "surname": "Nikolaevna",
+    "country": "Russia",
+    "city": "Moscow",
+    "contacts": "tel: +12345687952",
+    "date_birth": "1983-01-01T00:00:00Z"
 }
 
 POST

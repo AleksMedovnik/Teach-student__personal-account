@@ -33,7 +33,7 @@ func main() {
 		router.Get("/logout", middleware.DeserializeUser, controllers.LogoutUser)
 	})
 
-	micro.Get("/users/profile", middleware.DeserializeUser, controllers.GetMe)
+	micro.Get("/users/profile", middleware.DeserializeUser, controllers.GetProfile)
 
 	micro.All("*", func(c *fiber.Ctx) error {
 		path := c.Path()
