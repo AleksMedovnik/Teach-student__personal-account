@@ -28,7 +28,7 @@ func main() {
 	app.Use(logger.New(), cors.New())
 
 	micro.Route("/auth", func(router fiber.Router) {
-		router.Post("/register", middleware.DeserializeUser, controllers.SignUpUser)
+		router.Post("/register", middleware.DeserializeAdmin, controllers.SignUpUser)
 		router.Post("/admin", controllers.SignUpAdmin)
 		router.Post("/login", controllers.SignInUser)
 		router.Get("/logout", middleware.DeserializeUser, controllers.LogoutUser)
