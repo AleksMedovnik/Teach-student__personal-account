@@ -1,7 +1,7 @@
-// run database-server
+<h1>Run database-server</h1>
 docker-compose up -d
 
-// stop postgres-server
+<h1>stop postgres-server</h1>
 docker-compose down
 
 // run app
