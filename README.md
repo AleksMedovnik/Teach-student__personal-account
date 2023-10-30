@@ -1,20 +1,22 @@
-<h1>Run database-server</h1>
+<h3>Run database-server</h3>
 docker-compose up -d
 
-<h1>stop postgres-server</h1>
+<h3>Stop postgres-server</h3>
 docker-compose down
 
-// run app
+<h3>Run app</h3>
 air
 
-// viewing the database from the terminal
+<h3>Viewing the database from the terminal</h3>
 docker exec -it {your postgres container name} psql -U {your db username} {your db name}
-// exit
+
+<h3>Exit</h3>
 exit
 
-Admin registration:
+<h3>Admin registration:</h3>
 POST
 http://localhost:8000/api/auth/admin
+<code>
 {
   "name": "Alex",
   "email": "aleksander@gmail.com",
@@ -22,6 +24,7 @@ http://localhost:8000/api/auth/admin
   "passwordConfirm": "jfosdieipaoeik3558",
   "role": "admin"
 }
+</code>
 
 Login admin & users
 POST
