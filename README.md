@@ -63,3 +63,19 @@ Token: admin_token
 
 <h4>GET</h4>
 <code>http://localhost:8000/api/auth/logout</code>
+
+<h3>Create groups:</h3>
+Only the administrator can create, receive, modify, update, and delete student groups.
+<h4>Authorization -> Bearer</h4>
+Token: admin_token
+<h4>POST</h4>
+<code>http://localhost:8000/api/groups/</code>
+<code>
+{
+  "number": 511
+}
+</code>
+
+<h3>Get groups:</h3>
+<h4>GET</h4>
+<code>http://localhost:8000/api/groups/</code>

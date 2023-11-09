@@ -22,6 +22,7 @@ type User struct {
 	DateBirth datatypes.Date `gorm:"default:null"`
 	CreatedAt *time.Time     `gorm:"not null;default:now()"`
 	UpdatedAt *time.Time     `gorm:"not null;default:now()"`
+	Groups    []*Group       `gorm:"many2many:user_group;"`
 }
 
 type SignUpInput struct {
@@ -39,11 +40,11 @@ type SignUpInput struct {
 }
 
 type SignUpAdminInput struct {
-	Name            string         `json:"name" validate:"required"`
-	Email           string         `json:"email" validate:"required"`
-	Password        string         `json:"password" validate:"required,min=8"`
-	PasswordConfirm string         `json:"passwordConfirm" validate:"required,min=8"`
-	Role            string         `json:"role" validate:"required,containsrune=admin"`
+	Name            string `json:"name" validate:"required"`
+	Email           string `json:"email" validate:"required"`
+	Password        string `json:"password" validate:"required,min=8"`
+	PasswordConfirm string `json:"passwordConfirm" validate:"required,min=8"`
+	Role            string `json:"role" validate:"required,containsrune=admin"`
 }
 
 type SignInInput struct {

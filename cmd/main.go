@@ -36,6 +36,9 @@ func main() {
 
 	micro.Get("/users/profile", middleware.DeserializeUser, controllers.GetProfile)
 
+	micro.Post("/groups", middleware.DeserializeAdmin, controllers.CreateGroup)
+	micro.Get("/groups", middleware.DeserializeUser, controllers.GetGroup)
+
 	micro.All("*", func(c *fiber.Ctx) error {
 		path := c.Path()
 		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
