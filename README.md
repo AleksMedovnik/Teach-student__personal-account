@@ -65,17 +65,67 @@ Token: admin_token
 <code>http://localhost:8000/api/auth/logout</code>
 
 <h3>Create groups:</h3>
-Only the administrator can create, receive, modify, update, and delete student groups.
+Only the administrator can create, get, update and delete student groups.
 <h4>Authorization -> Bearer</h4>
 Token: admin_token
 <h4>POST</h4>
 <code>http://localhost:8000/api/groups/</code>
 <code>
 {
-  "number": 511
+  "number": 130,
+  "users": [
+      {
+          "id": "a3af738f-378a-44f2-9c41-c9ec1a9059d4",
+          "name": "Alex",
+          "email": "aleksander@gmail.com",
+          "role": "admin",
+          "photo": "default.png",
+          "date_birth": "0001-01-01T00:00:00Z",
+          "created_at": "2023-11-09T19:34:32.775224+03:00",
+          "updated_at": "2023-11-09T19:34:32.775224+03:00"
+      },
+      {
+          "id": "dbee3c3f-cad4-4680-9ec5-561f94022656",
+          "name": "Pasha",
+          "email": "pasha@gmail.com",
+          "role": "teacher",
+          "date_birth": "1983-01-01T00:00:00Z",
+          "surname": "Nikolaevich",
+          "country": "Russia",
+          "city": "Moscow",
+          "contacts": "tel: +12345687952",
+          "created_at": "2023-11-09T19:35:17.505857+03:00",
+          "updated_at": "2023-11-09T19:35:17.505857+03:00"
+      },
+      {
+          "id": "a563435b-6a1d-458d-8edf-e7b9b242554a",
+          "name": "Masha",
+          "email": "masha@gmail.com",
+          "role": "teacher",
+          "date_birth": "1983-01-01T00:00:00Z",
+          "surname": "Nikolaevna",
+          "country": "Russia",
+          "city": "Moscow",
+          "contacts": "tel: +12345687952",
+          "created_at": "2023-11-09T19:35:17.505857+03:00",
+          "updated_at": "2023-11-09T19:35:17.505857+03:00"
+      }
+  ]
 }
 </code>
 
 <h3>Get groups:</h3>
 <h4>GET</h4>
 <code>http://localhost:8000/api/groups/</code>
+
+<h3>Get group:</h3>
+<h4>GET</h4>
+<code>http://localhost:8000/api/groups/1/</code>
+
+<h3>Update groups:</h3>
+<h4>PUT</h4>
+<code>http://localhost:8000/api/groups/1/</code>
+
+<h3>Delete groups:</h3>
+<h4>DELETE</h4>
+<code>http://localhost:8000/api/groups/1/</code>

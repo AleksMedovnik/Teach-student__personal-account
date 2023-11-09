@@ -97,7 +97,7 @@ func DeserializeAdmin(c *fiber.Ctx) error {
 	}
 
 	if *user.Role != "admin" {
-		return c.Status(fiber.StatusForbidden).JSON(fiber.Map{"status": "fail", "message": "You don't have enough rights to register a user"})
+		return c.Status(fiber.StatusForbidden).JSON(fiber.Map{"status": "fail", "message": "You don't have enough rights to register a user or groups"})
 	}
 
 	c.Locals("user", models.FilterUserRecord(&user))

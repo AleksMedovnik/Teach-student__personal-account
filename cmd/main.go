@@ -4,12 +4,12 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/gofiber/fiber/v2"
-	"github.com/gofiber/fiber/v2/middleware/cors"
-	"github.com/gofiber/fiber/v2/middleware/logger"
 	"github.com/AleksMedovnik/Teach-student__personal-account/controllers"
 	"github.com/AleksMedovnik/Teach-student__personal-account/initializers"
 	"github.com/AleksMedovnik/Teach-student__personal-account/middleware"
+	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cors"
+	"github.com/gofiber/fiber/v2/middleware/logger"
 )
 
 func init() {
@@ -37,7 +37,10 @@ func main() {
 	micro.Get("/users/profile", middleware.DeserializeUser, controllers.GetProfile)
 
 	micro.Post("/groups", middleware.DeserializeAdmin, controllers.CreateGroup)
-	micro.Get("/groups", middleware.DeserializeUser, controllers.GetGroup)
+	micro.Get("/groups", middleware.DeserializeAdmin, controllers.GetGroups)
+	micro.Get("/groups/:id", middleware.DeserializeAdmin, controllers.GetGroup)
+	micro.Put("/groups/:id", middleware.DeserializeAdmin, controllers.UpdateGroup)
+	micro.Delete("/groups/:id", middleware.DeserializeAdmin, controllers.DeleteGroup)
 
 	micro.All("*", func(c *fiber.Ctx) error {
 		path := c.Path()
