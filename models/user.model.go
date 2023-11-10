@@ -65,6 +65,7 @@ type UserResponse struct {
 	Contacts  string         `json:"contacts,omitempty"`
 	CreatedAt time.Time      `json:"created_at"`
 	UpdatedAt time.Time      `json:"updated_at"`
+	Groups    []*Group       `json:"groups"`
 }
 
 func FilterUserRecord(user *User) UserResponse {
@@ -81,6 +82,7 @@ func FilterUserRecord(user *User) UserResponse {
 		DateBirth: user.DateBirth,
 		CreatedAt: *user.CreatedAt,
 		UpdatedAt: *user.UpdatedAt,
+		Groups:    user.Groups,
 	}
 }
 

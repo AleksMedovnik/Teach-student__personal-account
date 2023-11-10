@@ -37,7 +37,7 @@
 </code>
 
 <h3>User registration:</h3>
-Only the administrator can register a student and a teacher
+Only the administrator can register and get a student and a teacher
 <h4>Authorization -> Bearer</h4>
 Token: admin_token
 
@@ -58,6 +58,10 @@ Token: admin_token
 }
 </code>
 
+<h4>GET</h4>
+<code>http://localhost:8000/api/users/</code>
+
+<h3>Get own profile:</h3>
 <h4>GET</h4>
 <code>http://localhost:8000/api/users/profile</code>
 

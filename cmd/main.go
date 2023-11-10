@@ -34,7 +34,9 @@ func main() {
 		router.Get("/logout", middleware.DeserializeUser, controllers.LogoutUser)
 	})
 
+	micro.Get("/users", middleware.DeserializeUser, controllers.GetUsers)
 	micro.Get("/users/profile", middleware.DeserializeUser, controllers.GetProfile)
+	// micro.Get("/users/profile/groups", middleware.DeserializeUser, controllers.GetGroupsUser)
 
 	micro.Post("/groups", middleware.DeserializeAdmin, controllers.CreateGroup)
 	micro.Get("/groups", middleware.DeserializeAdmin, controllers.GetGroups)
