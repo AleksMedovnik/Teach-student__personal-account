@@ -97,10 +97,3 @@ func DeleteGroup(c *fiber.Ctx) error {
 	initializers.DB.Delete(&group)
 	return c.Status(fiber.StatusOK).JSON(fiber.Map{"status": "success", "data": fiber.Map{"group": group}})
 }
-
-func GetGroupsUser(c *fiber.Ctx) error {
-	var groups []models.Group
-	// users := initializers.DB.Model(&models.Group{}).Preload("Users").Find(&groups).Error
-	// return groups, err
-	return c.Status(fiber.StatusOK).JSON(fiber.Map{"status": "success", "data": fiber.Map{"groups": groups}})
-}
