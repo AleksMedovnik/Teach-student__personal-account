@@ -4,12 +4,12 @@ import (
 	"time"
 
 	"github.com/go-playground/validator/v10"
-	"github.com/google/uuid"
 	"gorm.io/datatypes"
+	"gorm.io/gorm"
 )
 
 type User struct {
-	ID        *uuid.UUID     `gorm:"type:uuid;default:uuid_generate_v4();primary_key"`
+	gorm.Model
 	Name      string         `gorm:"type:varchar(100);not null"`
 	Email     string         `gorm:"type:varchar(100);uniqueIndex;not null"`
 	Password  string         `gorm:"type:varchar(100);not null"`
@@ -20,9 +20,7 @@ type User struct {
 	City      string         `gorm:"type:varchar(255)"`
 	Contacts  string         `gorm:"type:text"`
 	DateBirth datatypes.Date `gorm:"default:null"`
-	CreatedAt *time.Time     `gorm:"not null;default:now()"`
-	UpdatedAt *time.Time     `gorm:"not null;default:now()"`
-	Groups    []*Group       `gorm:"many2many:user_group;"`
+	Groups    []*Group       `json:"groups" gorm:"many2many:user_group;"`
 }
 
 type SignUpInput struct {
@@ -53,7 +51,7 @@ type SignInInput struct {
 }
 
 type UserResponse struct {
-	ID        uuid.UUID      `json:"id,omitempty"`
+	ID        uint           `json:"id"`
 	Name      string         `json:"name,omitempty"`
 	Email     string         `json:"email,omitempty"`
 	Role      string         `json:"role,omitempty"`
@@ -70,7 +68,7 @@ type UserResponse struct {
 
 func FilterUserRecord(user *User) UserResponse {
 	return UserResponse{
-		ID:        *user.ID,
+		ID:        user.ID,
 		Name:      user.Name,
 		Email:     user.Email,
 		Surname:   user.Surname,
@@ -80,8 +78,6 @@ func FilterUserRecord(user *User) UserResponse {
 		Role:      *user.Role,
 		Photo:     *user.Photo,
 		DateBirth: user.DateBirth,
-		CreatedAt: *user.CreatedAt,
-		UpdatedAt: *user.UpdatedAt,
 		Groups:    user.Groups,
 	}
 }

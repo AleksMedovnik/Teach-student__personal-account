@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/gofiber/fiber/v2"
-	"github.com/golang-jwt/jwt"
 	"github.com/AleksMedovnik/Teach-student__personal-account/initializers"
 	"github.com/AleksMedovnik/Teach-student__personal-account/models"
+	"github.com/gofiber/fiber/v2"
+	"github.com/golang-jwt/jwt"
 )
 
 func DeserializeUser(c *fiber.Ctx) error {
@@ -46,7 +46,7 @@ func DeserializeUser(c *fiber.Ctx) error {
 	var user models.User
 	initializers.DB.First(&user, "id = ?", fmt.Sprint(claims["sub"]))
 
-	if user.ID.String() != claims["sub"] {
+	if fmt.Sprint(user.ID) != fmt.Sprint(claims["sub"]) {
 		return c.Status(fiber.StatusForbidden).JSON(fiber.Map{"status": "fail", "message": "the user belonging to this token no logger exists"})
 	}
 
@@ -54,7 +54,6 @@ func DeserializeUser(c *fiber.Ctx) error {
 
 	return c.Next()
 }
-
 
 func DeserializeAdmin(c *fiber.Ctx) error {
 	var tokenString string
@@ -92,7 +91,7 @@ func DeserializeAdmin(c *fiber.Ctx) error {
 	var user models.User
 	initializers.DB.First(&user, "id = ?", fmt.Sprint(claims["sub"]))
 
-	if user.ID.String() != claims["sub"] {
+	if fmt.Sprint(user.ID) != fmt.Sprint(claims["sub"]) {
 		return c.Status(fiber.StatusForbidden).JSON(fiber.Map{"status": "fail", "message": "the user belonging to this token no logger exists"})
 	}
 

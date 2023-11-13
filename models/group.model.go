@@ -1,10 +1,11 @@
 package models
 
+import "gorm.io/gorm"
+
 type Group struct {
-	ID        uint16  `json:"id" gorm:"primaryKey"`
-	Number    uint16  `gorm:"type:integer;uniqueIndex;not null"`
-	UserRefer int     `json:"user_id"`
-	Users     []*User `gorm:"many2many:user_group;"`
+	gorm.Model
+	Number uint16  `gorm:"type:integer;uniqueIndex;not null"`
+	Users  []*User `json:"users" gorm:"many2many:user_group"`
 }
 
 type GroupInput struct {
@@ -13,7 +14,7 @@ type GroupInput struct {
 }
 
 type GroupResponse struct {
-	ID     uint16  `json:"id"`
+	ID     uint    `json:"id"`
 	Number uint16  `json:"number"`
 	Users  []*User `json:"users"`
 }
@@ -25,3 +26,14 @@ func FilterGroupResord(group *Group) GroupResponse {
 		Users:  group.Users,
 	}
 }
+
+// func (group Group) FindAll() ([]Group, error) {
+// 	db, err := config.GetDB()
+// 	if err != nil {
+// 		return nil, err
+// 	} else {
+// 		var groups []Group
+// 		db.Preload("Users").Find(&groups)
+// 		return groups, nil
+// 	}
+// }

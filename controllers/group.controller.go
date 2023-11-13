@@ -47,7 +47,7 @@ func GetGroups(c *fiber.Ctx) error {
 func findGroup(id int, group *models.Group) error {
 	initializers.DB.Find(&group, "id = ?", id)
 	if group.ID == 0 {
-		return errors.New("Group does not exist")
+		return errors.New("group does not exist")
 	}
 	return nil
 }
@@ -96,4 +96,21 @@ func DeleteGroup(c *fiber.Ctx) error {
 	}
 	initializers.DB.Delete(&group)
 	return c.Status(fiber.StatusOK).JSON(fiber.Map{"status": "success", "data": fiber.Map{"group": group}})
+}
+
+func GetGroupUsers(c *fiber.Ctx) error {
+	id, err := c.ParamsInt("id")
+	var group models.Group
+	users := &group.Users
+	if err != nil {
+		return c.Status(400).JSON("Please ensure that :id is an integer")
+	}
+	if err := findGroup(id, &group); err != nil {
+		return c.Status(400).JSON(err.Error())
+	}
+	err = initializers.DB.Model(&group).Association("Users").Find(&users)
+	if err != nil {
+		return c.Status(400).JSON(err.Error())
+	}
+	return c.Status(fiber.StatusOK).JSON(fiber.Map{"status": "success", "data": fiber.Map{"users": users}})
 }

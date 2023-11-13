@@ -34,7 +34,9 @@ func main() {
 		router.Get("/logout", middleware.DeserializeUser, controllers.LogoutUser)
 	})
 
-	micro.Get("/users", middleware.DeserializeUser, controllers.GetUsers)
+	micro.Get("/users", middleware.DeserializeAdmin, controllers.GetUsers)
+	micro.Get("/users/:id", middleware.DeserializeAdmin, controllers.GetUser)
+
 	micro.Get("/users/profile", middleware.DeserializeUser, controllers.GetProfile)
 
 	micro.Post("/groups", middleware.DeserializeAdmin, controllers.CreateGroup)
@@ -42,6 +44,8 @@ func main() {
 	micro.Get("/groups/:id", middleware.DeserializeAdmin, controllers.GetGroup)
 	micro.Put("/groups/:id", middleware.DeserializeAdmin, controllers.UpdateGroup)
 	micro.Delete("/groups/:id", middleware.DeserializeAdmin, controllers.DeleteGroup)
+
+	micro.Get("/groups/:id/users", middleware.DeserializeAdmin, controllers.GetGroupUsers)
 
 	micro.All("*", func(c *fiber.Ctx) error {
 		path := c.Path()

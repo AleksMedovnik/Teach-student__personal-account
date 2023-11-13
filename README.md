@@ -10,7 +10,6 @@
 <h3>Viewing the database from the terminal</h3>
 <code>docker exec -it {your postgres container name} psql -U {your db username} {your db name}</code>
 
-<h3>Exit</h3>
 <code>exit</code>
 
 <h3>Admin registration:</h3>
@@ -68,7 +67,7 @@ Token: admin_token
 <h4>GET</h4>
 <code>http://localhost:8000/api/auth/logout</code>
 
-<h3>Create groups:</h3>
+<h3>Create, get, update, delete groups:</h3>
 Only the administrator can create, get, update and delete student groups.
 <h4>Authorization -> Bearer</h4>
 Token: admin_token
@@ -118,18 +117,17 @@ Token: admin_token
 }
 </code>
 
-<h3>Get groups:</h3>
 <h4>GET</h4>
 <code>http://localhost:8000/api/groups/</code>
 
-<h3>Get group:</h3>
 <h4>GET</h4>
 <code>http://localhost:8000/api/groups/1/</code>
 
-<h3>Update groups:</h3>
 <h4>PUT</h4>
 <code>http://localhost:8000/api/groups/1/</code>
 
-<h3>Delete groups:</h3>
 <h4>DELETE</h4>
 <code>http://localhost:8000/api/groups/1/</code>
+
+<h4>GET</h4>
+<code>http://localhost:8000/api/groups/1/users</code>
