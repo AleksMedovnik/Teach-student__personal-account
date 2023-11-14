@@ -10,7 +10,6 @@ import (
 
 func GetProfile(c *fiber.Ctx) error {
 	user := c.Locals("user").(models.UserResponse)
-
 	return c.Status(fiber.StatusOK).JSON(fiber.Map{"status": "success", "data": fiber.Map{"user": user}})
 }
 
@@ -38,4 +37,18 @@ func GetUser(c *fiber.Ctx) error {
 		return c.Status(400).JSON(err.Error())
 	}
 	return c.Status(fiber.StatusOK).JSON(fiber.Map{"status": "success", "data": fiber.Map{"user": user}})
+}
+
+func GetOwnGroups(c *fiber.Ctx) error {
+	user := c.Locals("user").(models.UserResponse)
+	var userSpec models.User
+	groups := &user.Groups
+	if err := findUser(int(user.ID), &userSpec); err != nil {
+		return c.Status(400).JSON(err.Error())
+	}
+	err := initializers.DB.Model(&userSpec).Association("Groups").Find(&groups)
+	if err != nil {
+		return c.Status(400).JSON(err.Error())
+	}
+	return c.Status(fiber.StatusOK).JSON(fiber.Map{"status": "success", "data": fiber.Map{"groups": groups}})
 }

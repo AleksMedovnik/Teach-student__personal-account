@@ -37,7 +37,8 @@ func main() {
 	micro.Get("/users", middleware.DeserializeAdmin, controllers.GetUsers)
 	micro.Get("/users/:id", middleware.DeserializeAdmin, controllers.GetUser)
 
-	micro.Get("/users/profile", middleware.DeserializeUser, controllers.GetProfile)
+	micro.Get("/profile", middleware.DeserializeUser, controllers.GetProfile)
+	micro.Get("/profile/groups", middleware.DeserializeUser, controllers.GetOwnGroups)
 
 	micro.Post("/groups", middleware.DeserializeAdmin, controllers.CreateGroup)
 	micro.Get("/groups", middleware.DeserializeAdmin, controllers.GetGroups)

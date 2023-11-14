@@ -35,6 +35,9 @@
 }
 </code>
 
+<h4>GET</h4>
+<code>http://localhost:8000/api/auth/logout</code>
+
 <h3>User registration:</h3>
 Only the administrator can register and get a student and a teacher
 <h4>Authorization -> Bearer</h4>
@@ -59,13 +62,15 @@ Token: admin_token
 
 <h4>GET</h4>
 <code>http://localhost:8000/api/users/</code>
+<code>http://localhost:8000/api/users/1/</code>
 
 <h3>Get own profile:</h3>
 <h4>GET</h4>
-<code>http://localhost:8000/api/users/profile</code>
+<code>http://localhost:8000/api/profile</code>
 
+<h3>Get own groups:</h3>
 <h4>GET</h4>
-<code>http://localhost:8000/api/auth/logout</code>
+<code>http://localhost:8000/api/profile/groups</code>
 
 <h3>Create, get, update, delete groups:</h3>
 Only the administrator can create, get, update and delete student groups.

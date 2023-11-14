@@ -2,7 +2,7 @@ package models
 
 import (
 	"time"
-
+	
 	"github.com/go-playground/validator/v10"
 	"gorm.io/datatypes"
 	"gorm.io/gorm"
@@ -20,7 +20,7 @@ type User struct {
 	City      string         `gorm:"type:varchar(255)"`
 	Contacts  string         `gorm:"type:text"`
 	DateBirth datatypes.Date `gorm:"default:null"`
-	Groups    []*Group       `json:"groups" gorm:"many2many:user_group;"`
+	Groups    []*Group       `json:"groups" gorm:"many2many:user_group"`
 }
 
 type SignUpInput struct {

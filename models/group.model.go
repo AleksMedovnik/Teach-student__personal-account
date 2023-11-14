@@ -26,14 +26,3 @@ func FilterGroupResord(group *Group) GroupResponse {
 		Users:  group.Users,
 	}
 }
-
-// func (group Group) FindAll() ([]Group, error) {
-// 	db, err := config.GetDB()
-// 	if err != nil {
-// 		return nil, err
-// 	} else {
-// 		var groups []Group
-// 		db.Preload("Users").Find(&groups)
-// 		return groups, nil
-// 	}
-// }
