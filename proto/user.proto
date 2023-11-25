@@ -1,0 +1,34 @@
+syntax="proto3";
+ 
+package proto;
+ 
+option go_package = "github.com/AleksMedovnik/Teach-student__personal-account";
+
+
+message NewAdmin {
+    string name = 1;
+    string email = 2;
+    string password = 3;
+    string password_confirm = 4;
+    string role = 5;
+}
+
+message Admin {
+    string name = 1;
+    string email = 2;
+    string role = 3;
+    string photo = 4;
+    string date_birth = 5;
+    string surname = 6;
+    string country = 7;
+    string city = 8;
+    string contacts = 9;
+    string created_at = 10;
+    string updated_at = 11;
+    string groups = 12;
+    fixed32 id = 13;
+}
+
+service AdminService {
+    rpc CreateAdmin(NewAdmin) returns (Admin) {}
+ }
